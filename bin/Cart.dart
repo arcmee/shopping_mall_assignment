@@ -1,24 +1,39 @@
+import 'CartProduct.dart';
 import 'Product.dart';
 
 class Cart {
-  Map<Product, int> insertedProduct = {};
+  Map<String?, CartProduct> insertedProduct = {};
+
   void insertProduct(Product product){
-    if(insertedProduct.containsKey(product)) {
-      insertedProduct.update(product, (amount) => amount += 1);
+    if(insertedProduct.containsKey(product.name)) {
+      insertedProduct.update(
+        product.name, (cartProduct) {
+          cartProduct.increaseAmount();
+          return cartProduct;
+        });
     }
     else{
-      insertedProduct.addAll({product:1});
+      insertedProduct.addAll({product.name : CartProduct(product)});
     }
   }
 
   int calculateProductsPrice(){
-    // return insertedProduct
-    return 0;
+    if(insertedProduct.isEmpty){
+      return 0;
+    }
+    else{
+      int totalPrice = 0;
+      insertedProduct.forEach((_,value) {
+        totalPrice += value.amount * value.getProductPrice();
+      });
+
+      return totalPrice;
+    }
   }
 
   void printInsertedProducts(){
-    insertedProduct.forEach((product, amount) => 
-      print({'${product.name}${(product.price)} / ${amount*product.price}'}
+    insertedProduct.forEach((name, product) => 
+      print('$name${(product.getProductPrice())}/ ${product.amount} / ${product.getTotalPrice()}'
     ));
   }
 
