@@ -43,7 +43,7 @@ class ShoppingMall{
   void run(){
     String command = '';
     bool exit = false;
-
+    
     while(!exit) {
       printIntroduce();
       command = stdin.readLineSync()!;
@@ -96,6 +96,13 @@ class ShoppingMall{
         }
         cart.printInsertedProducts();
         print('총 ${cart.calculateProductsPrice()}');
+      }
+      else if( MallActions.clearCart.index.toString() == command ) {
+        cart.clearCart();
+        if(cart.insertedProduct.isEmpty){
+          print('카트가 비어있습니다.');
+          continue;
+        }
       }
       else {
         print("다시 입력해 주세요");

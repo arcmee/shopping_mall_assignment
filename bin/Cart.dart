@@ -50,6 +50,10 @@ class Cart {
     ));
   }
 
+  void clearCart(){
+    insertedProduct.clear();
+  }
+
   Cart();
 }
 

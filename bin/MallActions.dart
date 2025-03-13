@@ -4,8 +4,8 @@ enum MallActions {
   intoCartByIndex,
   intoCartByName,
   totalPriceInCart,
-  exit;
-
+  exit,
+  clearCart,
 }
 
 extension MallActionsExtension on MallActions {
@@ -21,7 +21,9 @@ extension MallActionsExtension on MallActions {
       case MallActions.totalPriceInCart:
         return '장바구니에 담긴 상품의 총 가격 보기';
       case MallActions.exit:
-        return '프로그램 종료';                    
+        return '프로그램 종료';
+      case MallActions.clearCart:
+        return '장바구니 비우기';                      
       default:
         return "";
     }
