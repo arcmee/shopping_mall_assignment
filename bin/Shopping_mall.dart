@@ -106,6 +106,7 @@ class ShoppingMall{
   bool exitConfirm(){
     String command = stdin.readLineSync()!;
     if(command.toLowerCase() == 'y'){
+      print('이용해 주셔서 감사합니다 ~ 안녕히 가세요!');
       return true;
     }
     else{
