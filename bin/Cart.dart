@@ -17,6 +17,19 @@ class Cart {
     }
   }
 
+  void insertProductAndAmount(Product product, int amount){
+    if(insertedProduct.containsKey(product.name)) {
+      insertedProduct.update(
+        product.name, (cartProduct) {
+          cartProduct.setAmount(amount);
+          return cartProduct;
+      });
+    }
+    else{
+      insertedProduct.addAll({product.name : CartProduct.withAmount(product, amount)});
+    }
+  }
+
   int calculateProductsPrice(){
     if(insertedProduct.isEmpty){
       return 0;
@@ -33,7 +46,7 @@ class Cart {
 
   void printInsertedProducts(){
     insertedProduct.forEach((name, product) => 
-      print('$name${(product.getProductPrice())}/ ${product.amount} / ${product.getTotalPrice()}'
+      print('$name ${(product.getProductPrice())}/ ${product.amount} / ${product.getTotalPrice()}'
     ));
   }
 

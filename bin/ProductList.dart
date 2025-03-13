@@ -1,4 +1,5 @@
 import 'Product.dart';
+import 'package:collection/collection.dart';
 
 class ProductList{
   List<Product> products = [];
@@ -36,6 +37,13 @@ class ProductList{
     else{
       return null;
     }
-    
+  }
+
+  Product? getProductByName(String name) {
+    if(products.isEmpty){
+      return null;
+    }
+    Product? retProduct = products.firstWhereOrNull((product) => product.name == name);
+    return retProduct;
   }
 }
